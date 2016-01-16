@@ -28,6 +28,7 @@
         <version.hibernate.core>5.0.7.Final</version.hibernate.core>
         <version.postgresql>9.4.1207</version.postgresql>
         <version.swagger.springmvc>1.0.2</version.swagger.springmvc>
+        <version.swagger.ui>2.1.4</version.swagger.ui>
     </properties>
 
     <dependencyManagement>
@@ -73,6 +74,13 @@
                 <artifactId>swagger-springmvc</artifactId>
                 <version>${version.swagger.springmvc}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>swagger-ui</artifactId>
+                <version>${version.swagger.ui}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -102,30 +110,36 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>springloaded</artifactId>
-                            <version>${version.springloaded}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <artifactId>maven-dependency-plugin</artifactId>
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>${version.springloaded}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

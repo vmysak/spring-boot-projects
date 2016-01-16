@@ -35,6 +35,11 @@
             <artifactId>hibernate-labs-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.zeksa</groupId>
+            <artifactId>hibernate-labs-gui</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

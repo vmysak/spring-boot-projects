@@ -19,6 +19,7 @@
         <module>hibernate-labs-repository</module>
         <module>hibernate-labs-service</module>
         <module>hibernate-labs-rest</module>
+        <module>hibernate-labs-gui</module>
         <module>hibernate-labs-jar</module>
     </modules>
 

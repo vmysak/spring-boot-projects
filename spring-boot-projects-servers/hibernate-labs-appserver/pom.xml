@@ -14,6 +14,11 @@
 
     <packaging>jar</packaging>
 
+    <properties>
+        <dir.gui.classpath>static/gui</dir.gui.classpath>
+        <dir.swagger.classpath>static/swagger</dir.swagger.classpath>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.zeksa</groupId>
@@ -50,29 +55,65 @@
             <groupId>com.mangofactory</groupId>
             <artifactId>swagger-springmvc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>swagger-ui</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${version.springloaded}</version>
-                    </dependency>
-                </dependencies>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>${project.artifactId}-fetch-swagger</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/${dir.swagger.classpath}</outputDirectory>
+                            <stripVersion>true</stripVersion>
+                            <excludeTransitive>true</excludeTransitive>
+                            <includeArtifactIds>swagger-ui</includeArtifactIds>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>${project.artifactId}-fetch-gui</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/${dir.gui.classpath}</outputDirectory>
+                            <stripVersion>true</stripVersion>
+                            <excludeTransitive>false</excludeTransitive>
+                            <includeArtifactIds>hibernate-labs-gui</includeArtifactIds>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
+                <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>${project.artifactId}-configure-gui</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <tasks>
+                                <property name="guiDirClasspath"
+                                          value="${project.build.directory}/classes/${dir.gui.classpath}"/>
+                                <property name="swaggerDirClasspath"
+                                          value="${project.build.directory}/classes/${dir.swagger.classpath}"/>
+                                <ant antfile="${basedir}/build/configureSwagger.xml"/>
+                            </tasks>
+                        </configuration>
                         <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
+                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>

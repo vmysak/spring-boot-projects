@@ -28,7 +28,7 @@ public class SwaggerConfiguration {
 
 	private ApiInfo apiInfo() {
 		ApiInfo apiInfo = new ApiInfo("Hibernate Labs Project API", "API for Hibernate Labs Project",
-				"Licensed under the Apache License, Version 2.0", "https://github.com/zeksa/spring-boot-projects",
+				"Licensed under the Apache License, Version 2.0", "",
 				"Apache License, Version 2.0", "https://www.apache.org/licenses/LICENSE-2.0");
 		return apiInfo;
 	}
