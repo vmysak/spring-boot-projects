@@ -6,18 +6,19 @@
 
     <parent>
         <groupId>org.zeksa</groupId>
-        <artifactId>spring-boot-projects-applications</artifactId>
+        <artifactId>hibernate-labs</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>hibernate-labs</artifactId>
+    <artifactId>hibernate-labs-model</artifactId>
 
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>hibernate-labs-model</module>
-        <module>hibernate-labs-rest</module>
-        <module>hibernate-labs-jar</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

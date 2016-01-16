@@ -22,6 +22,7 @@
         <version.compiler>1.7</version.compiler>
         <version.compiler.plugin>3.2</version.compiler.plugin>
         <version.spring>4.1.4.RELEASE</version.spring>
+        <version.lombok>1.16.6</version.lombok>
     </properties>
 
     <dependencyManagement>
@@ -33,6 +34,12 @@
                 <type>pom</type>
                 <version>${version.spring}</version>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
