@@ -16,5 +16,17 @@ public class Message {
 
 	@Getter
 	@Setter
+	private String author;
+
+	@Getter
+	@Setter
 	private String text;
+
+	public Message() {
+	}
+
+	public Message(String author, String text) {
+		this.text = text;
+	}
+
 }
