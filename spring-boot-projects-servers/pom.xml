@@ -32,7 +32,7 @@
         <dependencies>
             <dependency>
                 <groupId>org.zeksa</groupId>
-                <artifactId>hibernate-labs</artifactId>
+                <artifactId>hibernate-labs-jar</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
