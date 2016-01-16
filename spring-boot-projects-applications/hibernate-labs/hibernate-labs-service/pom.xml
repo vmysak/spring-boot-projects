@@ -10,20 +10,15 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>hibernate-labs-rest</artifactId>
+    <artifactId>hibernate-labs-service</artifactId>
 
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.zeksa</groupId>
-            <artifactId>hibernate-labs-service</artifactId>
+            <artifactId>hibernate-labs-repository</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
 

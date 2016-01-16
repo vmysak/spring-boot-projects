@@ -27,6 +27,7 @@ public class Message {
 
 	public Message(String author, String text) {
 		this.text = text;
+		this.author=author;
 	}
 
 }

@@ -27,6 +27,11 @@
         </dependency>
         <dependency>
             <groupId>org.zeksa</groupId>
+            <artifactId>hibernate-labs-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.zeksa</groupId>
             <artifactId>hibernate-labs-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
