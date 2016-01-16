@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.5.RELEASE</version>
+        <version>1.2.2.RELEASE</version>
     </parent>
 
     <groupId>org.zeksa</groupId>
@@ -21,13 +21,27 @@
     </modules>
 
     <properties>
-        <!-- MUST BE EQUALS TO PARENT (SPRINGLOADED DEPS) -->
-        <version.springboot.parent>1.2.5.RELEASE</version.springboot.parent>
+        <!-- MUST BE EQUAL TO PARENT VERSION -->
+        <version.springboot.parent>1.2.2.RELEASE</version.springboot.parent>
+
+        <version.springloaded>1.2.1.RELEASE</version.springloaded>
         <version.hibernate.core>5.0.7.Final</version.hibernate.core>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${version.springboot.parent}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${version.springboot.parent}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
@@ -37,21 +51,11 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
         <!-- SPRINGLOADED -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>springloaded</artifactId>
-            <version>${version.springboot.parent}</version>
+            <version>${version.springloaded}</version>
         </dependency>
 
         <!-- LOGGING -->
@@ -78,7 +82,7 @@
                         <dependency>
                             <groupId>org.springframework</groupId>
                             <artifactId>springloaded</artifactId>
-                            <version>${version.springboot.parent}</version>
+                            <version>${version.springloaded}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
