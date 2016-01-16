@@ -21,7 +21,21 @@
 
         <version.compiler>1.7</version.compiler>
         <version.compiler.plugin>3.2</version.compiler.plugin>
+        <version.spring>4.1.4.RELEASE</version.spring>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- BOM -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <type>pom</type>
+                <version>${version.spring}</version>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

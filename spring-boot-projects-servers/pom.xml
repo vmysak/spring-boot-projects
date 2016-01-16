@@ -31,6 +31,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.zeksa</groupId>
+                <artifactId>hibernate-labs</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${version.springboot.parent}</version>
