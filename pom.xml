@@ -23,6 +23,7 @@
         <version.compiler.plugin>3.2</version.compiler.plugin>
         <version.spring>4.1.4.RELEASE</version.spring>
         <version.lombok>1.16.6</version.lombok>
+        <version.hibernate.core>5.0.7.Final</version.hibernate.core>
     </properties>
 
     <dependencyManagement>
@@ -40,6 +41,18 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${version.lombok}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${version.hibernate.core}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${version.hibernate.core}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
