@@ -12,8 +12,10 @@ public class MessageRestController {
 	@Autowired
 	MessageService messageService;
 
-	@RequestMapping(value = "/random", method = RequestMethod.POST)
-	public void random() {
-		messageService.save(new Message("aa", "rand"));
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public
+	@ResponseBody
+	Message save(@RequestBody Message message) {
+		return messageService.save(message);
 	}
 }

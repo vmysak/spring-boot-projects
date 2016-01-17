@@ -3,15 +3,16 @@ package org.zeksa.hibernate.labs.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Message {
 
 	@Id
-	@GeneratedValue
+	@TableGenerator(name = "TABLE_MESSAGE_GEN", table = "SEQUENCE_TABLE", pkColumnName = "SEQ_NAME",
+			valueColumnName = "SEQ_COUNT", pkColumnValue = "EMP_SEQ")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_MESSAGE_GEN")
+	@Getter
 	private Long id;
 
 	@Getter
