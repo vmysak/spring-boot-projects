@@ -6,19 +6,20 @@
 
     <parent>
         <groupId>org.zeksa</groupId>
-        <artifactId>spring-boot-projects</artifactId>
+        <artifactId>spring-boot-projects-applications</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-boot-projects-applications</artifactId>
+    <artifactId>collections-basic</artifactId>
 
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>hibernate-labs</module>
-        <module>exceptions-basic</module>
-        <module>io-basic</module>
-        <module>collections-basic</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.zeksa</groupId>
+            <artifactId>spring-boot-projects-conf</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

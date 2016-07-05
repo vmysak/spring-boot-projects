@@ -11,6 +11,7 @@
     <name>spring-boot-projects</name>
 
     <modules>
+        <module>spring-boot-projects-conf</module>
         <module>spring-boot-projects-applications</module>
         <module>spring-boot-projects-servers</module>
         <module>spring-boot-projects-files</module>
@@ -27,6 +28,7 @@
         <version.hibernate.core>5.0.7.Final</version.hibernate.core>
         <version.spring.data.jpa>1.9.2.RELEASE</version.spring.data.jpa>
         <version.postgresql>9.4.1207</version.postgresql>
+        <version.slf4j>1.7.21</version.slf4j>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +64,18 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${version.spring.data.jpa}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${version.slf4j}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
