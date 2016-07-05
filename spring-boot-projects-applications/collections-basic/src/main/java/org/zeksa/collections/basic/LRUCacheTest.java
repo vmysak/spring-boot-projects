@@ -6,7 +6,7 @@ public class LRUCacheTest {
 
     public static void main(String ...args){
         int capacity=5;
-        
+
         SimpleLRUCache<Integer, String> cache1=new SimpleLRUCache<>(capacity);
         SimpleLRUCache<Integer, String> cache2=new SimpleLRUCache<>(capacity);
 
@@ -17,6 +17,12 @@ public class LRUCacheTest {
 
         System.out.println(cache1.get(2));
         System.out.println(cache1.get(4));
+
+        System.out.println(cache1);
+        System.out.println(cache2);
+
+        cache1.put(6, String.valueOf(6));
+        cache2.put(6, String.valueOf(6));
 
         System.out.println(cache1);
         System.out.println(cache2);
