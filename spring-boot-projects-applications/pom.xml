@@ -16,9 +16,6 @@
 
     <modules>
         <module>hibernate-labs</module>
-        <module>exceptions-basic</module>
-        <module>io-basic</module>
-        <module>collections-basic</module>
     </modules>
 
 </project>

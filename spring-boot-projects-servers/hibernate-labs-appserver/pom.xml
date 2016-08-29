@@ -17,6 +17,7 @@
     <properties>
         <dir.gui.classpath>static/gui</dir.gui.classpath>
         <dir.swagger.classpath>static/swagger</dir.swagger.classpath>
+        <file.swagger.props>swagger.build.properties</file.swagger.props>
     </properties>
 
     <dependencies>
@@ -105,10 +106,14 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <tasks>
+                                <property name="buildClasspath"
+                                          value="${project.build.directory}/classes"/>
                                 <property name="guiDirClasspath"
                                           value="${project.build.directory}/classes/${dir.gui.classpath}"/>
                                 <property name="swaggerDirClasspath"
                                           value="${project.build.directory}/classes/${dir.swagger.classpath}"/>
+                                <property name="swaggerProperties"
+                                          value="${project.build.directory}/classes/${file.swagger.props}"/>
                                 <ant antfile="${basedir}/build/configureSwagger.xml"/>
                             </tasks>
                         </configuration>
