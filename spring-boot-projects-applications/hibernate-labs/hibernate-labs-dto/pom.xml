@@ -10,21 +10,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>hibernate-labs-service</artifactId>
+    <artifactId>hibernate-labs-dto</artifactId>
 
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>org.zeksa</groupId>
-            <artifactId>hibernate-labs-dto</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.zeksa</groupId>
-            <artifactId>hibernate-labs-repository</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
