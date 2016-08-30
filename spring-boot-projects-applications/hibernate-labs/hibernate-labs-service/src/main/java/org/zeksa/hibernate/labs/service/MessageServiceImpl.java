@@ -7,7 +7,6 @@ import org.zeksa.hibernate.labs.model.Message;
 import org.zeksa.hibernate.labs.model.MessageDTO;
 import org.zeksa.hibernate.labs.repository.MessageRepository;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service("messageService")
@@ -17,8 +16,8 @@ public class MessageServiceImpl implements MessageService {
 	MessageRepository messageRepository;
 
 	@Override
-	public Collection<MessageDTO> findByAuthor(String name) {
-		List<Message> messages = (List<Message>) messageRepository.findByAuthor(name);
+	public List<MessageDTO> findByAuthor(String authorId) {
+		List<Message> messages = (List<Message>) messageRepository.findByAuthorId(authorId);
 		return MessageAssembler.toDTOList(messages);
 	}
 

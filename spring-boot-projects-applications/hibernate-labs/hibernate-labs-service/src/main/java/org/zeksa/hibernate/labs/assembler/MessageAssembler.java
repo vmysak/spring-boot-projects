@@ -3,6 +3,7 @@ package org.zeksa.hibernate.labs.assembler;
 import org.zeksa.hibernate.labs.model.Message;
 import org.zeksa.hibernate.labs.model.MessageDTO;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,18 +11,18 @@ public class MessageAssembler {
 
     public static MessageDTO toDTO(Message message) {
         MessageDTO dto = new MessageDTO();
-        dto.setAuthor(message.getAuthor());
+        dto.setAuthorId(message.getAuthorId());
         dto.setText(message.getText());
 
         return dto;
     }
 
     public static List<MessageDTO> toDTOList(List<Message> messages) {
-        List<MessageDTO> dtoList = Collections.emptyList();
+        List<MessageDTO> dtoList = new ArrayList<>();
 
         for (Message message : messages) {
             MessageDTO dto = new MessageDTO();
-            dto.setAuthor(message.getAuthor());
+            dto.setAuthorId(message.getAuthorId());
             dto.setText(message.getText());
             dtoList.add(dto);
         }
@@ -32,7 +33,7 @@ public class MessageAssembler {
     public static Message fromDTO(MessageDTO dto) {
         Message message = new Message();
         message.setText(dto.getText());
-        message.setAuthor(dto.getAuthor());
+        message.setAuthorId(dto.getAuthorId());
 
         return message;
     }
@@ -43,7 +44,7 @@ public class MessageAssembler {
         for (MessageDTO dto : dtos) {
             Message message = new Message();
             message.setText(dto.getText());
-            message.setAuthor(dto.getAuthor());
+            message.setAuthorId(dto.getAuthorId());
             messages.add(message);
         }
 

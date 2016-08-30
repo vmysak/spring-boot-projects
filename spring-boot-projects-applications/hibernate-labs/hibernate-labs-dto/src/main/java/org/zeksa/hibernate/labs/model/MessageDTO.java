@@ -7,7 +7,7 @@ public class MessageDTO {
 
 	@Getter
 	@Setter
-	private String author;
+	private String authorId;
 
 	@Getter
 	@Setter
