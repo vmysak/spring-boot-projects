@@ -8,5 +8,5 @@ import java.util.Collection;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-	Collection<Message> findByAuthor(String name);
+	Collection<Message> findByAuthorId(String authorId);
 }

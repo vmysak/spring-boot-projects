@@ -1,11 +1,15 @@
 package org.zeksa.hibernate.labs.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message {
 
 	@Id
@@ -17,18 +21,10 @@ public class Message {
 
 	@Getter
 	@Setter
-	private String author;
+	private String authorId;
 
 	@Getter
 	@Setter
 	private String text;
-
-	public Message() {
-	}
-
-	public Message(String author, String text) {
-		this.text = text;
-		this.author=author;
-	}
 
 }

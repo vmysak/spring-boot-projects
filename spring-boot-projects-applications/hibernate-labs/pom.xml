@@ -16,6 +16,7 @@
 
     <modules>
         <module>hibernate-labs-model</module>
+        <module>hibernate-labs-dto</module>
         <module>hibernate-labs-repository</module>
         <module>hibernate-labs-service</module>
         <module>hibernate-labs-rest</module>

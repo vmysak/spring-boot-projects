@@ -17,6 +17,12 @@
     <dependencies>
         <dependency>
             <groupId>org.zeksa</groupId>
+            <artifactId>hibernate-labs-dto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.zeksa</groupId>
             <artifactId>hibernate-labs-repository</artifactId>
             <version>${project.version}</version>
         </dependency>

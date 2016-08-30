@@ -1,12 +1,13 @@
 package org.zeksa.hibernate.labs.service;
 
-import org.zeksa.hibernate.labs.model.Message;
+import org.zeksa.hibernate.labs.model.MessageDTO;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface MessageService {
 
-	Collection<Message> findByAuthor(String name);
+	List<MessageDTO> findByAuthor(String author);
 
-	Message save(Message message);
+	MessageDTO save(MessageDTO message);
 }
