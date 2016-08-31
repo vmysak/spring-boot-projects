@@ -29,7 +29,7 @@ public class MessageRestController {
     @RequestMapping(value = "/author/{authorId}", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<MessageDTO> findByAuthor(@PathVariable String authorId) {
-        return messageService.findByAuthor(authorId);
+    List<MessageDTO> findByAuthorId(@PathVariable String authorId) {
+        return messageService.findByAuthorId(authorId);
     }
 }

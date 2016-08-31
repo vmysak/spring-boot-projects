@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MessageService {
 
-	List<MessageDTO> findByAuthor(String author);
+	List<MessageDTO> findByAuthorId(String author);
 
 	MessageDTO save(MessageDTO message);
 }
