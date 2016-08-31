@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>collections-basic</module>
+        <module>java-tutorials</module>
         <module>hibernate-labs</module>
     </modules>
 

@@ -10,6 +10,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>collections-basic</artifactId>
+    <artifactId>java-tutorials</artifactId>
 
 </project>
