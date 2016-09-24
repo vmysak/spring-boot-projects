@@ -16,7 +16,7 @@ public class MessageServiceImpl implements MessageService {
 	MessageRepository messageRepository;
 
 	@Override
-	public List<MessageDTO> findByAuthor(String authorId) {
+	public List<MessageDTO> findByAuthorId(String authorId) {
 		List<Message> messages = (List<Message>) messageRepository.findByAuthorId(authorId);
 		return MessageAssembler.toDTOList(messages);
 	}
