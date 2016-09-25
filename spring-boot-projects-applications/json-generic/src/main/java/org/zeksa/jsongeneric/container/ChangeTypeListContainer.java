@@ -7,11 +7,14 @@ import java.util.Collection;
 
 public class ChangeTypeListContainer<T> extends ObjectListContainer<T, ChangeType> {
 
-    public ChangeTypeListContainer(JsonPropertyName listName, Collection<T> data, ChangeType changeType) {
-        super(listName, data, changeType);
+    public static final JsonPropertyName TYPE = JsonPropertyName.CHANGE_TYPE;
+    public static final JsonPropertyName LIST = JsonPropertyName.DATA;
+
+    public ChangeTypeListContainer(Collection<T> data, ChangeType changeType) {
+        super(LIST, data, changeType);
     }
 
-    public ChangeTypeListContainer(JsonPropertyName listName, T data, ChangeType changeType) {
-        super(listName, data, changeType);
+    public ChangeTypeListContainer(T data, ChangeType changeType) {
+        super(LIST, data, changeType);
     }
 }

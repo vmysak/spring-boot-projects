@@ -23,8 +23,8 @@ public class JsonRunner {
         SomeObject someObject = mockSomeObject();
 
         ChangeTypeMapContainer changeTypeMapContainer = new ChangeTypeMapContainer();
-        ChangeTypeListContainer<SectionDTO> sectionsContainer = new ChangeTypeListContainer<>(JsonPropertyName.DATA, sections, ChangeType.SECTIONS);
-        ChangeTypeListContainer<SomeObject> someObjectContainer = new ChangeTypeListContainer<>(JsonPropertyName.DATA, someObject, ChangeType.SOME_OBJECT);
+        ChangeTypeListContainer<SectionDTO> sectionsContainer = new ChangeTypeListContainer<>(sections, ChangeType.SECTIONS);
+        ChangeTypeListContainer<SomeObject> someObjectContainer = new ChangeTypeListContainer<>(someObject, ChangeType.SOME_OBJECT);
 
         changeTypeMapContainer.put(ChangeType.SECTIONS, sectionsContainer);
         changeTypeMapContainer.put(ChangeType.SOME_OBJECT, someObjectContainer);
@@ -50,7 +50,7 @@ public class JsonRunner {
     }
 
     private static SomeObject mockSomeObject() {
-        SomeObject someObject=new SomeObject();
+        SomeObject someObject = new SomeObject();
         someObject.setObjectId(UUID.randomUUID().toString());
         someObject.setSomeValue("fgdg");
 
@@ -66,5 +66,8 @@ public class JsonRunner {
 
         EnumsListContainer requestedForDeserialized = Serializer.deserializeEnumsListContainer(requestedFor);
         System.out.println(requestedForDeserialized);
+
+        ChangeTypeMapContainer dataDeserialized = Serializer.deserializeChangeTypeMapContainer(data);
+        System.out.println(dataDeserialized);
     }
 }

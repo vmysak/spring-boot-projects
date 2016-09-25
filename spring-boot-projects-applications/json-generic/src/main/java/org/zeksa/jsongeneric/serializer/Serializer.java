@@ -3,6 +3,7 @@ package org.zeksa.jsongeneric.serializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.zeksa.jsongeneric.container.ChangeTypeListContainer;
+import org.zeksa.jsongeneric.container.ChangeTypeMapContainer;
 import org.zeksa.jsongeneric.container.EnumsListContainer;
 import org.zeksa.jsongeneric.intefaces.JSONCompatible;
 
@@ -24,8 +25,8 @@ public class Serializer {
         return gson.toJson(data);
     }
 
-    public static ChangeTypeListContainer deserializeChangeTypeListContainer(String data) {
-        return gson.fromJson(data, ChangeTypeListContainer.class);
+    public static ChangeTypeMapContainer deserializeChangeTypeMapContainer(String data) {
+        return gson.fromJson(data, ChangeTypeMapContainer.class);
     }
 
     public static EnumsListContainer deserializeEnumsListContainer(String data) {

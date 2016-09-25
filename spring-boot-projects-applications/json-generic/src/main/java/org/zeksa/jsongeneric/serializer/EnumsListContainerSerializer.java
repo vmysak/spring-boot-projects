@@ -27,6 +27,7 @@ class EnumsListContainerSerializer implements JsonSerializer<EnumsListContainer>
     @Override
     public JsonElement serialize(EnumsListContainer container, Type t, JsonSerializationContext ctx) {
         JsonObject jsonObject = new JsonObject();
+
         jsonObject.add(type, DefaultSerializer.toJsonTree(container.getType().getId()));
         jsonObject.add(list, DefaultSerializer.toJsonTree(container.getList()));
 
