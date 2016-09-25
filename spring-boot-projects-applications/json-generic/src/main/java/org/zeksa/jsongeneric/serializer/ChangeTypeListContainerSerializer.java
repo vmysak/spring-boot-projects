@@ -9,10 +9,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import org.zeksa.jsongeneric.container.ChangeTypeListContainer;
-import org.zeksa.jsongeneric.intefaces.EnumWithId;
 import org.zeksa.jsongeneric.model.ChangeType;
 import org.zeksa.jsongeneric.util.ChangeTypeMapping;
-import org.zeksa.jsongeneric.util.EnumsMapping;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -20,8 +18,8 @@ import java.util.List;
 
 class ChangeTypeListContainerSerializer implements JsonSerializer<ChangeTypeListContainer>, JsonDeserializer<ChangeTypeListContainer> {
 
-    private String type = ChangeTypeListContainer.TYPE.getId();
-    private String list = ChangeTypeListContainer.LIST.getId();
+    private String type = ChangeTypeListContainer.TYPE;
+    private String list = ChangeTypeListContainer.DATA;
 
     @Override
     public JsonElement serialize(ChangeTypeListContainer container, Type t, JsonSerializationContext ctx) {

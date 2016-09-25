@@ -5,7 +5,6 @@ import org.zeksa.jsongeneric.container.EnumsListContainer;
 import org.zeksa.jsongeneric.intefaces.EnumWithId;
 import org.zeksa.jsongeneric.model.ChangeType;
 import org.zeksa.jsongeneric.model.Enums;
-import org.zeksa.jsongeneric.model.JsonPropertyName;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

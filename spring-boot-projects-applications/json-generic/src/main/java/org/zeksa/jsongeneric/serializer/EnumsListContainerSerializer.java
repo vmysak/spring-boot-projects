@@ -8,21 +8,20 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import org.zeksa.jsongeneric.container.ChangeTypeListContainer;
 import org.zeksa.jsongeneric.container.EnumsListContainer;
 import org.zeksa.jsongeneric.intefaces.EnumWithId;
 import org.zeksa.jsongeneric.model.Enums;
 import org.zeksa.jsongeneric.util.EnumsMapping;
-import org.zeksa.jsongeneric.model.JsonPropertyName;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 class EnumsListContainerSerializer implements JsonSerializer<EnumsListContainer>, JsonDeserializer<EnumsListContainer> {
 
-    private String type = EnumsListContainer.TYPE.getId();
-    private String list = EnumsListContainer.LIST.getId();
+    private String type = ChangeTypeListContainer.TYPE;
+    private String list = ChangeTypeListContainer.DATA;
 
     @Override
     public JsonElement serialize(EnumsListContainer container, Type t, JsonSerializationContext ctx) {

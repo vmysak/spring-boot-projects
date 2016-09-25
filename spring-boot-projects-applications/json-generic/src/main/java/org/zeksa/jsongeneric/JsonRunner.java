@@ -1,15 +1,14 @@
 package org.zeksa.jsongeneric;
 
+import org.zeksa.jsongeneric.container.ChangeTypeListContainer;
+import org.zeksa.jsongeneric.container.ChangeTypeMapContainer;
 import org.zeksa.jsongeneric.container.EnumsListContainer;
 import org.zeksa.jsongeneric.dto.SectionDTO;
 import org.zeksa.jsongeneric.dto.SomeObject;
 import org.zeksa.jsongeneric.dto.SubSectionDTO;
-import org.zeksa.jsongeneric.container.ChangeTypeListContainer;
-import org.zeksa.jsongeneric.container.ChangeTypeMapContainer;
 import org.zeksa.jsongeneric.model.ChangeType;
 import org.zeksa.jsongeneric.request.JSONRequest;
 import org.zeksa.jsongeneric.serializer.Serializer;
-import org.zeksa.jsongeneric.model.JsonPropertyName;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -22,10 +21,10 @@ public class JsonRunner {
         List<SectionDTO> sections = mockSections();
         SomeObject someObject = mockSomeObject();
 
-        ChangeTypeMapContainer changeTypeMapContainer = new ChangeTypeMapContainer();
         ChangeTypeListContainer<SectionDTO> sectionsContainer = new ChangeTypeListContainer<>(sections, ChangeType.SECTIONS);
         ChangeTypeListContainer<SomeObject> someObjectContainer = new ChangeTypeListContainer<>(someObject, ChangeType.SOME_OBJECT);
 
+        ChangeTypeMapContainer changeTypeMapContainer = new ChangeTypeMapContainer();
         changeTypeMapContainer.put(ChangeType.SECTIONS, sectionsContainer);
         changeTypeMapContainer.put(ChangeType.SOME_OBJECT, someObjectContainer);
 
