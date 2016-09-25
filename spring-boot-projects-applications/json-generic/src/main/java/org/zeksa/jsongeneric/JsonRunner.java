@@ -1,13 +1,15 @@
 package org.zeksa.jsongeneric;
 
+import org.zeksa.jsongeneric.container.EnumsListContainer;
 import org.zeksa.jsongeneric.dto.SectionDTO;
+import org.zeksa.jsongeneric.dto.SomeObject;
 import org.zeksa.jsongeneric.dto.SubSectionDTO;
-import org.zeksa.jsongeneric.container.ObjectListContainer;
-import org.zeksa.jsongeneric.container.MapContainer;
-import org.zeksa.jsongeneric.model.DataType;
+import org.zeksa.jsongeneric.container.ChangeTypeListContainer;
+import org.zeksa.jsongeneric.container.ChangeTypeMapContainer;
+import org.zeksa.jsongeneric.model.ChangeType;
 import org.zeksa.jsongeneric.request.JSONRequest;
 import org.zeksa.jsongeneric.serializer.Serializer;
-import org.zeksa.jsongeneric.util.ListName;
+import org.zeksa.jsongeneric.model.JsonPropertyName;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -18,13 +20,17 @@ public class JsonRunner {
 
     public static void main(String[] args) {
         List<SectionDTO> sections = mockSections();
+        SomeObject someObject = mockSomeObject();
 
-        MapContainer mapContainer = new MapContainer();
-        ObjectListContainer<SectionDTO> container = new ObjectListContainer<>(ListName.DATA, DataType.SECTION, sections);
-        mapContainer.getMap().put(DataType.SECTION, container);
+        ChangeTypeMapContainer changeTypeMapContainer = new ChangeTypeMapContainer();
+        ChangeTypeListContainer<SectionDTO> sectionsContainer = new ChangeTypeListContainer<>(JsonPropertyName.DATA, sections, ChangeType.SECTIONS);
+        ChangeTypeListContainer<SomeObject> someObjectContainer = new ChangeTypeListContainer<>(JsonPropertyName.DATA, someObject, ChangeType.SOME_OBJECT);
+
+        changeTypeMapContainer.put(ChangeType.SECTIONS, sectionsContainer);
+        changeTypeMapContainer.put(ChangeType.SOME_OBJECT, someObjectContainer);
 
         JSONRequest request = new JSONRequest();
-        request.setData(mapContainer);
+        request.setData(changeTypeMapContainer);
 
         sendRequest(request);
     }
@@ -43,6 +49,14 @@ public class JsonRunner {
         return Arrays.asList(section, section);
     }
 
+    private static SomeObject mockSomeObject() {
+        SomeObject someObject=new SomeObject();
+        someObject.setObjectId(UUID.randomUUID().toString());
+        someObject.setSomeValue("fgdg");
+
+        return someObject;
+    }
+
     private static void sendRequest(JSONRequest request) {
         String requestedFor = Serializer.serialize(request.getRequestedFor());
         String data = Serializer.serialize(request.getData());
@@ -50,7 +64,7 @@ public class JsonRunner {
         System.out.println(requestedFor);
         System.out.println(data);
 
-        ObjectListContainer requestedForDeserialized = Serializer.deserializeListContainer(requestedFor);
+        EnumsListContainer requestedForDeserialized = Serializer.deserializeEnumsListContainer(requestedFor);
         System.out.println(requestedForDeserialized);
     }
 }

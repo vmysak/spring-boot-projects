@@ -1,36 +1,41 @@
 package org.zeksa.jsongeneric.request;
 
-import org.zeksa.jsongeneric.container.MapContainer;
-import org.zeksa.jsongeneric.model.DataType;
-import org.zeksa.jsongeneric.container.ObjectListContainer;
-import org.zeksa.jsongeneric.util.ListName;
+import org.zeksa.jsongeneric.container.ChangeTypeMapContainer;
+import org.zeksa.jsongeneric.container.EnumsListContainer;
+import org.zeksa.jsongeneric.intefaces.EnumWithId;
+import org.zeksa.jsongeneric.model.ChangeType;
+import org.zeksa.jsongeneric.model.Enums;
+import org.zeksa.jsongeneric.model.JsonPropertyName;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class JSONRequest {
 
-    private ObjectListContainer<DataType> requestedFor;
-    private MapContainer data;
+    private EnumsListContainer requestedFor;
+    private ChangeTypeMapContainer data;
 
-    public ObjectListContainer<DataType> getRequestedFor() {
+    public EnumsListContainer getRequestedFor() {
         return requestedFor;
     }
 
-    public void setRequestedFor(ObjectListContainer<DataType> requestedFor) {
+    public void setRequestedFor(EnumsListContainer requestedFor) {
         this.requestedFor = requestedFor;
     }
 
-    public MapContainer getData() {
+    public ChangeTypeMapContainer getData() {
         return data;
     }
 
-    public void setData(MapContainer data) {
+    public void setData(ChangeTypeMapContainer data) {
         this.data = data;
         initRequestedFor();
     }
 
     private void initRequestedFor() {
-        Set<DataType> types = data.getMap().keySet();
-        requestedFor = new ObjectListContainer<>(ListName.REQUESTED_FOR, DataType.DATA_TYPE, types);
+        Set<ChangeType> types = data.keySet();
+        Set<EnumWithId> converted= new LinkedHashSet<EnumWithId>(types);
+        requestedFor = new EnumsListContainer(converted, Enums.CHANGE_TYPE);
     }
+
 }

@@ -1,35 +1,41 @@
 package org.zeksa.jsongeneric.container;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.zeksa.jsongeneric.intefaces.EnumWithId;
 import org.zeksa.jsongeneric.intefaces.JSONCompatible;
-import org.zeksa.jsongeneric.model.DataType;
-import org.zeksa.jsongeneric.util.ListName;
+import org.zeksa.jsongeneric.model.JsonPropertyName;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class ObjectListContainer<T> implements JSONCompatible {
+public class ObjectListContainer<T, E extends EnumWithId> implements JSONCompatible {
 
-    private ListName listName;
-    private DataType dataType;
+    private JsonPropertyName listName;
+    private E type;
     private ListOf<T> list;
 
     private ObjectListContainer() {
     }
 
-    public ObjectListContainer(ListName listName, DataType dataType, Collection<T> data) {
+    public ObjectListContainer(JsonPropertyName listName, Collection<T> data, E type) {
         this.listName = listName;
-        this.dataType = dataType;
+        this.type = type;
         this.list = ListOf.from(data);
     }
 
-    public ListName getListName() {
+    public ObjectListContainer(JsonPropertyName listName, T data, E type) {
+        this.listName = listName;
+        this.type = type;
+        this.list = ListOf.from(data);
+    }
+
+    public JsonPropertyName getListName() {
         return listName;
     }
 
-    public DataType getDataType() {
-        return dataType;
+    public E getType() {
+        return type;
     }
 
     public List<T> getList() {
