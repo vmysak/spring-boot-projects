@@ -1,4 +1,4 @@
-package org.zeksa.jsongeneric.dto;
+package org.zeksa.jsongeneric.app.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,8 @@ public class SectionDTO {
     }
 
     public List<SubSectionDTO> getSubSections() {
-        if(subSections==null){
-            subSections=new ArrayList<>();
+        if (subSections == null) {
+            subSections = new ArrayList<>();
         }
         return subSections;
     }

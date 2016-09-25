@@ -1,4 +1,4 @@
-package org.zeksa.jsongeneric.dto;
+package org.zeksa.jsongeneric.app.dto;
 
 public class SomeObject {
 

@@ -1,4 +1,4 @@
-package org.zeksa.jsongeneric.dto;
+package org.zeksa.jsongeneric.app.dto;
 
 import java.math.BigDecimal;
 

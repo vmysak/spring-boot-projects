@@ -1,4 +1,4 @@
-package org.zeksa.jsongeneric.serializer;
+package org.zeksa.jsongeneric.lib.serializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
