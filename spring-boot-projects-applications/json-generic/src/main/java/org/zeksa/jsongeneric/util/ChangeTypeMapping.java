@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ChangeTypeMapping {
 
-    public ChangeTypeMapping() {
+    private ChangeTypeMapping() {
     }
 
     private static final Map<ChangeType, Class> classMapping;

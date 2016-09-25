@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class EnumsMapping {
 
-    public EnumsMapping() {
+    private EnumsMapping() {
     }
 
     private static final Map<Enums, Class> enumMapping;
