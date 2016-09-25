@@ -23,4 +23,8 @@ public class DataTypeMapping {
         return mapping.get(dataType);
     }
 
+    public static Class getMappedClass(String dataType) {
+        return getMappedClass(DataType.valueOf(dataType));
+    }
+
 }

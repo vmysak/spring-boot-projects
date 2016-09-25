@@ -1,36 +1,36 @@
 package org.zeksa.jsongeneric.request;
 
-import org.zeksa.jsongeneric.model.DataContainerMap;
+import org.zeksa.jsongeneric.container.MapContainer;
 import org.zeksa.jsongeneric.model.DataType;
-import org.zeksa.jsongeneric.model.ListContainer;
-import org.zeksa.jsongeneric.util.FieldName;
+import org.zeksa.jsongeneric.container.ObjectListContainer;
+import org.zeksa.jsongeneric.util.ListName;
 
 import java.util.Set;
 
 public class JSONRequest {
 
-    private ListContainer<DataType> requestedFor;
-    private DataContainerMap data;
+    private ObjectListContainer<DataType> requestedFor;
+    private MapContainer data;
 
-    public ListContainer<DataType> getRequestedFor() {
+    public ObjectListContainer<DataType> getRequestedFor() {
         return requestedFor;
     }
 
-    public void setRequestedFor(ListContainer<DataType> requestedFor) {
+    public void setRequestedFor(ObjectListContainer<DataType> requestedFor) {
         this.requestedFor = requestedFor;
     }
 
-    public DataContainerMap getData() {
+    public MapContainer getData() {
         return data;
     }
 
-    public void setData(DataContainerMap data) {
+    public void setData(MapContainer data) {
         this.data = data;
         initRequestedFor();
     }
 
     private void initRequestedFor() {
         Set<DataType> types = data.getMap().keySet();
-        requestedFor = new ListContainer<>(FieldName.REQUESTED_FOR, DataType.DATA_TYPE, types);
+        requestedFor = new ObjectListContainer<>(ListName.REQUESTED_FOR, DataType.DATA_TYPE, types);
     }
 }

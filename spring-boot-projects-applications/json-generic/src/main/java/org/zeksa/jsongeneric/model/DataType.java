@@ -1,8 +1,8 @@
 package org.zeksa.jsongeneric.model;
 
-public enum DataType implements JSONCompatible {
+public enum DataType {
 
     SECTION,
-    DATA_TYPE;
+    DATA_TYPE
 
 }

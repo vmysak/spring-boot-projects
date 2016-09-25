@@ -1,6 +1,6 @@
 package org.zeksa.jsongeneric.util;
 
-public enum FieldName {
+public enum ListName {
 
     REQUESTED_FOR("requestedFor"),
     DATA_TYPE("dataType"),
@@ -8,7 +8,7 @@ public enum FieldName {
 
     private String name;
 
-    FieldName(String name) {
+    ListName(String name) {
         this.name = name;
     }
 

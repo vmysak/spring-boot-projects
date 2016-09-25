@@ -2,9 +2,8 @@ package org.zeksa.jsongeneric.serializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.zeksa.jsongeneric.model.ListContainer;
-import org.zeksa.jsongeneric.model.JSONCompatible;
-import org.zeksa.jsongeneric.model.ListOf;
+import org.zeksa.jsongeneric.container.ObjectListContainer;
+import org.zeksa.jsongeneric.intefaces.JSONCompatible;
 
 public class Serializer {
 
@@ -12,8 +11,7 @@ public class Serializer {
 
     static {
         gson = new GsonBuilder()
-                .registerTypeAdapter(ListOf.class, new ListOfSerializer())
-                .registerTypeAdapter(ListContainer.class, new DataContainerSerializer())
+                .registerTypeAdapter(ObjectListContainer.class, new ListContainerSerializer())
                 .create();
     }
 
@@ -24,8 +22,8 @@ public class Serializer {
         return gson.toJson(data);
     }
 
-    public static ListOf deserializeListOf(String data) {
-        return gson.fromJson(data, ListOf.class);
+    public static ObjectListContainer deserializeListContainer(String data) {
+        return gson.fromJson(data, ObjectListContainer.class);
     }
 
 }

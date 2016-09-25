@@ -1,4 +1,4 @@
-package org.zeksa.jsongeneric.model;
+package org.zeksa.jsongeneric.intefaces;
 
 import java.io.Serializable;
 
