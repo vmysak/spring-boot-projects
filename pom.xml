@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <version.compiler>1.7</version.compiler>
+        <version.compiler>1.8</version.compiler>
         <version.compiler.plugin>3.2</version.compiler.plugin>
         <version.spring>4.1.4.RELEASE</version.spring>
         <version.lombok>1.16.6</version.lombok>
@@ -29,6 +29,8 @@
         <version.spring.data.jpa>1.9.2.RELEASE</version.spring.data.jpa>
         <version.postgresql>9.4.1207</version.postgresql>
         <version.slf4j>1.7.21</version.slf4j>
+        <version.apache.commons>3.0</version.apache.commons>
+        <version.spring-data-rest>2.3.0.RELEASE</version.spring-data-rest>
     </properties>
 
     <dependencyManagement>
@@ -40,6 +42,12 @@
                 <type>pom</type>
                 <version>${version.spring}</version>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-rest-core</artifactId>
+                <version>${version.spring-data-rest}</version>
             </dependency>
 
             <dependency>
@@ -76,6 +84,12 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${version.slf4j}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${version.apache.commons}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -18,6 +18,7 @@
 
     <modules>
         <module>hibernate-labs-appserver</module>
+        <module>spring-core-appserver</module>
     </modules>
 
     <properties>
@@ -33,11 +34,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.zeksa</groupId>
-                <artifactId>hibernate-labs-jar</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>

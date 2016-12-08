@@ -24,6 +24,7 @@
         <dependency>
             <groupId>org.zeksa</groupId>
             <artifactId>hibernate-labs-jar</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
