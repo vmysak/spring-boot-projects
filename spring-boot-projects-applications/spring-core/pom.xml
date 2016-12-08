@@ -12,6 +12,13 @@
 
     <artifactId>spring-core</artifactId>
 
+    <modules>
+        <module>spring-core-commons</module>
+        <module>spring-core-gui</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
     <dependencies>
 
         <dependency>
