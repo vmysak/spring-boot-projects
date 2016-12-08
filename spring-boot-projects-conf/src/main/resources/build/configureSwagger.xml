@@ -15,6 +15,9 @@
             </fileset>
         </move>
 
+        <touch file="${swaggerProperties}"/>
+        <echo file="${swaggerProperties}" message="swaggerUnpackedDirectory=${dir.swagger.classpath}"/>
+
         <delete dir="${swaggerDirClasspath}/META-INF"/>
         <delete dir="${guiDirClasspath}/META-INF"/>
         <delete dir="${guiDirClasspath}/static/swagger"/>

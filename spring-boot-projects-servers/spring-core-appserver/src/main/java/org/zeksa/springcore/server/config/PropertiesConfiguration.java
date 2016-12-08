@@ -1,23 +1,20 @@
-package org.zeksa.hibernate.labs;
+package org.zeksa.springcore.server.config;
 
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
-@EnableAutoConfiguration
-@ComponentScan
-public class AppServerConfiguration {
+public class PropertiesConfiguration {
 
     @Bean
     public PropertyPlaceholderConfigurer swaggerPropertiesConfiguration() {
         PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
         configurer.setIgnoreUnresolvablePlaceholders(true);
-        configurer.setLocation(new ClassPathResource("swagger.build.properties"));
-
+        configurer.setLocations(
+                new ClassPathResource("mailservice.properties"),
+                new ClassPathResource("swagger.build.properties"));
         return configurer;
     }
 
