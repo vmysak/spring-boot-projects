@@ -14,11 +14,15 @@
 
     <packaging>jar</packaging>
 
+    <properties>
+        <id.artifact.gui>spring-core-gui</id.artifact.gui>
+    </properties>
+
     <dependencies>
 
         <dependency>
             <groupId>org.zeksa</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>spring-core-jar</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -28,5 +32,16 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

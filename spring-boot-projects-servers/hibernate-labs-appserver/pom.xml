@@ -15,9 +15,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <dir.gui.classpath>static/gui</dir.gui.classpath>
-        <dir.swagger.classpath>static/swagger</dir.swagger.classpath>
-        <file.swagger.props>swagger.build.properties</file.swagger.props>
+        <id.artifact.gui>hibernate-labs-gui</id.artifact.gui>
     </properties>
 
     <dependencies>
@@ -58,71 +56,15 @@
             <artifactId>swagger-springmvc</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>swagger-ui</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>${project.artifactId}-fetch-swagger</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/${dir.swagger.classpath}</outputDirectory>
-                            <stripVersion>true</stripVersion>
-                            <excludeTransitive>true</excludeTransitive>
-                            <includeArtifactIds>swagger-ui</includeArtifactIds>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>${project.artifactId}-fetch-gui</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/${dir.gui.classpath}</outputDirectory>
-                            <stripVersion>true</stripVersion>
-                            <excludeTransitive>false</excludeTransitive>
-                            <includeArtifactIds>hibernate-labs-gui</includeArtifactIds>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
-
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>${project.artifactId}-configure-gui</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <tasks>
-                                <property name="buildClasspath"
-                                          value="${project.build.directory}/classes"/>
-                                <property name="guiDirClasspath"
-                                          value="${project.build.directory}/classes/${dir.gui.classpath}"/>
-                                <property name="swaggerDirClasspath"
-                                          value="${project.build.directory}/classes/${dir.swagger.classpath}"/>
-                                <property name="swaggerProperties"
-                                          value="${project.build.directory}/classes/${file.swagger.props}"/>
-                                <ant antfile="${basedir}/build/configureSwagger.xml"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

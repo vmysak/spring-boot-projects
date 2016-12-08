@@ -1,4 +1,4 @@
-<project name="configureSwagger" default="run" basedir=".">
+<project name="configureSwagger" default="run" basedir="">
     <target name="run">
         <fileset dir="${swaggerDirClasspath}/META-INF/resources/webjars/swagger-ui/"
                  includes="**/index.html" id="swagger.indexhtml"/>

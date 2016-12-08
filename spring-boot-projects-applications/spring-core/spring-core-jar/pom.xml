@@ -6,38 +6,25 @@
 
     <parent>
         <groupId>org.zeksa</groupId>
-        <artifactId>spring-boot-projects-applications</artifactId>
+        <artifactId>spring-core</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-core</artifactId>
-
-    <modules>
-        <module>spring-core-commons</module>
-        <module>spring-core-gui</module>
-        <module>spring-core-jar</module>
-    </modules>
-
-    <packaging>pom</packaging>
+    <artifactId>spring-core-jar</artifactId>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <groupId>org.zeksa</groupId>
+            <artifactId>spring-core-commons</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.zeksa</groupId>
-            <artifactId>spring-boot-projects-conf</artifactId>
+            <artifactId>spring-core-gui</artifactId>
             <version>${project.version}</version>
         </dependency>
-
     </dependencies>
 
 </project>
