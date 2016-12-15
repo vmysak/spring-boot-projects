@@ -3,6 +3,7 @@ package org.zeksa.springcore.resources._1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,9 +12,10 @@ import org.zeksa.springcore.beans._1.MailService;
 
 @RequestMapping("/api/1")
 @RestController
-public class Resource {
+@Scope("request")
+public class Resource1 {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Resource.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Resource1.class);
 
     @Autowired
     MailService mailService;

@@ -97,6 +97,8 @@
                 <configuration>
                     <source>${version.compiler}</source>
                     <target>${version.compiler}</target>
+                    <testSource>${version.compiler}</testSource>
+                    <testTarget>${version.compiler}</testTarget>
                 </configuration>
             </plugin>
         </plugins>

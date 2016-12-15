@@ -25,6 +25,8 @@
         <!-- MUST BE EQUAL TO PARENT VERSION -->
         <version.springboot.parent>1.2.2.RELEASE</version.springboot.parent>
 
+        <version.compiler>1.8</version.compiler>
+        <version.compiler.plugin>3.2</version.compiler.plugin>
         <version.springloaded>1.2.1.RELEASE</version.springloaded>
         <version.hibernate.core>5.0.7.Final</version.hibernate.core>
         <version.postgresql>9.4.1207</version.postgresql>
@@ -49,6 +51,12 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${version.springboot.parent}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
                 <version>${version.springboot.parent}</version>
             </dependency>
 
@@ -133,7 +141,8 @@
                                 <goal>unpack-dependencies</goal>
                             </goals>
                             <configuration>
-                                <outputDirectory>${project.build.outputDirectory}/${dir.swagger.classpath}</outputDirectory>
+                                <outputDirectory>${project.build.outputDirectory}/${dir.swagger.classpath}
+                                </outputDirectory>
                                 <stripVersion>true</stripVersion>
                                 <excludeTransitive>true</excludeTransitive>
                                 <includeArtifactIds>swagger-ui</includeArtifactIds>
@@ -221,6 +230,18 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration>
+                    <source>${version.compiler}</source>
+                    <target>${version.compiler}</target>
+                    <testSource>${version.compiler}</testSource>
+                    <testTarget>${version.compiler}</testTarget>
+                </configuration>
             </plugin>
         </plugins>
     </build>
