@@ -39,7 +39,6 @@ public class Resource2Test extends ResourceAbstractTest {
     private static final Logger LOG = LoggerFactory.getLogger(Resource2Test.class);
     private static final String SUPERUSER = "superuser";
     private static final String DATA = "data";
-    private static final String OK = "OK";
     private static int count = 5000;
     @Rule
     public TestStopwatch stopwatch = new TestStopwatch();
@@ -62,26 +61,22 @@ public class Resource2Test extends ResourceAbstractTest {
 
     @Test
     public void testAddUserData() throws JsonProcessingException {
-        List<String> responses = requests.parallelStream().map(this::callREST).collect(Collectors.toList());
-        stopwatch.runtime(SECONDS);
+        requests.parallelStream().forEach(this::callREST);
 
         assertEquals(count, userCache.counter());
         assertEquals(count, requests.size());
-        assertEquals(count, responses.size());
         assertEquals(0, filterOutOfList(SUPERUSER).size());
         assertEquals(count, userCache.size(SUPERUSER));
-        responses.forEach(resp -> assertEquals(resp, OK));
+        
+        stopwatch.runtime(SECONDS);
     }
 
-    private String callREST(UserCacheDTO request) {
+    private void callREST(UserCacheDTO request) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> httpEntity;
-        httpEntity = new HttpEntity<>(JsonSerializer.toJson(request), requestHeaders);
+        HttpEntity<String> httpEntity = new HttpEntity<>(JsonSerializer.toJson(request), requestHeaders);
         restTemplate.postForLocation(getResourceContextURL() + "cache", httpEntity);
-
-        return OK;
     }
 
     private List<String> filterOutOfList(String userName) {
