@@ -1,7 +1,6 @@
 package org.zeksa.springcore.resources._2;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,17 +18,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 import org.zeksa.springcore.beans._2.UserCache;
+import org.zeksa.springcore.beans._2.UserCacheDTO;
 import org.zeksa.springcore.resources.ResourceAbstractTest;
 import org.zeksa.springcore.resources.TestStopwatch;
+import org.zeksa.springcore.resources.json.JsonSerializer;
 import org.zeksa.springcore.server.SpringCoreAppServer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
 
@@ -39,16 +37,14 @@ import static org.junit.Assert.assertEquals;
 public class Resource2Test extends ResourceAbstractTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(Resource2Test.class);
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String SUPERUSER = "superuser";
-    private static final String NAME = "userName";
     private static final String DATA = "data";
     private static final String OK = "OK";
     private static int count = 5000;
     @Rule
     public TestStopwatch stopwatch = new TestStopwatch();
     private RestTemplate restTemplate = new TestRestTemplate();
-    private List<Map<String, String>> requests;
+    private List<UserCacheDTO> requests;
     @Autowired
     private UserCache userCache;
 
@@ -57,10 +53,10 @@ public class Resource2Test extends ResourceAbstractTest {
         requests = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            Map<String, String> requestBody = new HashMap<>();
-            requestBody.put(NAME, SUPERUSER);
-            requestBody.put(DATA, DATA + i);
-            requests.add(requestBody);
+            UserCacheDTO request = new UserCacheDTO();
+            request.setUserName(SUPERUSER);
+            request.setData(DATA + i);
+            requests.add(request);
         }
     }
 
@@ -77,18 +73,14 @@ public class Resource2Test extends ResourceAbstractTest {
         responses.forEach(resp -> assertEquals(resp, OK));
     }
 
-    private String callREST(Map<String, String> request) {
+    private String callREST(UserCacheDTO request) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-        try {
-            HttpEntity<String> httpEntity;
-            httpEntity = new HttpEntity<>(OBJECT_MAPPER.writeValueAsString(request), requestHeaders);
-            restTemplate.postForLocation(getResourceContextURL() + "cache", httpEntity);
-        } catch (JsonProcessingException e) {
-            LOG.error("JSON error", e);
-            return "";
-        }
+        HttpEntity<String> httpEntity;
+        httpEntity = new HttpEntity<>(JsonSerializer.toJson(request), requestHeaders);
+        restTemplate.postForLocation(getResourceContextURL() + "cache", httpEntity);
+
         return OK;
     }
 
@@ -102,8 +94,8 @@ public class Resource2Test extends ResourceAbstractTest {
         return requests.stream().map(this::getData).collect(Collectors.toList());
     }
 
-    private String getData(Map<String, String> map) {
-        return map.get(DATA);
+    private String getData(UserCacheDTO dto) {
+        return dto.getData();
     }
 
     private String getResourceContextURL() {
