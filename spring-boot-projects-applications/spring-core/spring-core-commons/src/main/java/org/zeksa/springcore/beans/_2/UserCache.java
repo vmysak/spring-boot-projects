@@ -45,11 +45,13 @@ public class UserCache {
         counter.incrementAndGet();
     }
 
-    public List<UserCacheDTO> get(String userName) {
-        return cache.get(userName).parallelStream().map(data -> toUserCacheDTO(data, userName)).collect(Collectors.toList());
+    public UserCacheListDTO get(String userName) {
+        UserCacheListDTO result = new UserCacheListDTO();
+        result.setData(cache.get(userName).parallelStream().map(data -> toUserCacheDTO(data, userName)).collect(Collectors.toList()));
+        return result;
     }
 
-    private UserCacheDTO toUserCacheDTO(String data, String userName){
+    private UserCacheDTO toUserCacheDTO(String data, String userName) {
         UserCacheDTO userCache = new UserCacheDTO();
         userCache.setData(data);
         userCache.setUserName(userName);

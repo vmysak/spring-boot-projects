@@ -1,6 +1,7 @@
 package org.zeksa.springcore.resources._2;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +19,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 import org.zeksa.springcore.beans._2.UserCache;
 import org.zeksa.springcore.beans._2.UserCacheDTO;
+import org.zeksa.springcore.beans._2.UserCacheListDTO;
 import org.zeksa.springcore.resources.ResourceAbstractTest;
 import org.zeksa.springcore.resources.json.JsonSerializer;
 import org.zeksa.springcore.server.SpringCoreAppServer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,36 +38,60 @@ public class Resource2Test extends ResourceAbstractTest {
     private static final Logger LOG = LoggerFactory.getLogger(Resource2Test.class);
     private static final String SUPERUSER = "superuser";
     private static final String DATA = "data";
-    private static int count = 5000;
+    private static int count = 500;
     private RestTemplate restTemplate = new TestRestTemplate();
-    private List<RestRequest> requests;
+    private List<RestRequest> postRequests;
+    private List<RestRequest> getPostRequests;
     @Autowired
     private UserCache userCache;
 
     @Before
     public void initTestData() {
-        requests = new ArrayList<>();
+        postRequests = new ArrayList<>();
+        getPostRequests = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < 2 * count; i++) {
             UserCacheDTO data = new UserCacheDTO();
             data.setUserName(SUPERUSER);
             data.setData(DATA + i);
             RestRequest request = createRestRequest(data, RequestType.POST, getResourceContextURL() + "cache");
-            requests.add(request);
+            if (i < count) {
+                postRequests.add(request);
+                request = createRestRequest(data, RequestType.GET, getResourceContextURL() + "cache/" + data.getUserName());
+                getPostRequests.add(request);
+            } else {
+                getPostRequests.add(request);
+            }
         }
     }
 
     @Test
     public void testAddUserData() throws JsonProcessingException {
-        requests.parallelStream().forEach(this::callPostRest);
+        postRequests.parallelStream().forEach(this::callRest);
+        getPostRequests.parallelStream().forEach(this::callRest);
 
-        assertEquals(count, requests.size());
-        assertEquals(count, userCache.counter());
-        assertEquals(count, userCache.size(SUPERUSER));
+        assertEquals(count, postRequests.size());
+        assertEquals(count * 2, userCache.counter());
+        assertEquals(count * 2, userCache.size(SUPERUSER));
+    }
+
+    private void callRest(RestRequest request) {
+        switch (request.getRequestType()) {
+            case GET:
+                callGetRest(request);
+                break;
+            case POST:
+                callPostRest(request);
+                break;
+        }
     }
 
     private void callPostRest(RestRequest request) {
         restTemplate.postForLocation(request.getUrl(), request.getRequestEntity());
+    }
+
+    private void callGetRest(RestRequest request) {
+        restTemplate.getForObject(request.getUrl(), UserCacheListDTO.class);
     }
 
     private RestRequest createRestRequest(Object data, RequestType requestType, String url) {
@@ -88,7 +115,7 @@ public class Resource2Test extends ResourceAbstractTest {
         GET, POST
     }
 
-    private class RestRequest {
+    private class RestRequest implements Serializable {
 
         private RequestType requestType;
         private HttpEntity requestEntity;
