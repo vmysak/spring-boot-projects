@@ -24,7 +24,6 @@ import org.zeksa.springcore.server.SpringCoreAppServer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,7 +37,7 @@ public class Resource2Test extends ResourceAbstractTest {
     private static final String DATA = "data";
     private static int count = 5000;
     private RestTemplate restTemplate = new TestRestTemplate();
-    private List<UserCacheDTO> requests;
+    private List<RestRequest> requests;
     @Autowired
     private UserCache userCache;
 
@@ -47,46 +46,76 @@ public class Resource2Test extends ResourceAbstractTest {
         requests = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            UserCacheDTO request = new UserCacheDTO();
-            request.setUserName(SUPERUSER);
-            request.setData(DATA + i);
+            UserCacheDTO data = new UserCacheDTO();
+            data.setUserName(SUPERUSER);
+            data.setData(DATA + i);
+            RestRequest request = createRestRequest(data, RequestType.POST, getResourceContextURL() + "cache");
             requests.add(request);
         }
     }
 
     @Test
     public void testAddUserData() throws JsonProcessingException {
-        requests.parallelStream().forEach(this::callREST);
+        requests.parallelStream().forEach(this::callPostRest);
 
         assertEquals(count, requests.size());
         assertEquals(count, userCache.counter());
-        assertEquals(0, filterOutOfList(SUPERUSER).size());
         assertEquals(count, userCache.size(SUPERUSER));
     }
 
-    private void callREST(UserCacheDTO request) {
+    private void callPostRest(RestRequest request) {
+        restTemplate.postForLocation(request.getUrl(), request.getRequestEntity());
+    }
+
+    private RestRequest createRestRequest(Object data, RequestType requestType, String url) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> httpEntity = new HttpEntity<>(JsonSerializer.toJson(request), requestHeaders);
-        restTemplate.postForLocation(getResourceContextURL() + "cache", httpEntity);
-    }
+        HttpEntity<String> httpEntity = new HttpEntity<>(JsonSerializer.toJson(data), requestHeaders);
+        RestRequest request = new RestRequest();
+        request.setRequestType(requestType);
+        request.setRequestEntity(httpEntity);
+        request.setUrl(url);
 
-    private List<String> filterOutOfList(String userName) {
-        List<String> filtered = getValuesList();
-        filtered.removeAll(userCache.get(userName));
-        return filtered;
-    }
-
-    private List<String> getValuesList() {
-        return requests.stream().map(this::getData).collect(Collectors.toList());
-    }
-
-    private String getData(UserCacheDTO dto) {
-        return dto.getData();
+        return request;
     }
 
     private String getResourceContextURL() {
         return StringUtils.join(getContextURL(), "/api/2/");
+    }
+
+    private enum RequestType {
+        GET, POST
+    }
+
+    private class RestRequest {
+
+        private RequestType requestType;
+        private HttpEntity requestEntity;
+        private String url;
+
+        public RequestType getRequestType() {
+            return requestType;
+        }
+
+        public void setRequestType(RequestType requestType) {
+            this.requestType = requestType;
+        }
+
+        public HttpEntity getRequestEntity() {
+            return requestEntity;
+        }
+
+        public void setRequestEntity(HttpEntity requestEntity) {
+            this.requestEntity = requestEntity;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 }

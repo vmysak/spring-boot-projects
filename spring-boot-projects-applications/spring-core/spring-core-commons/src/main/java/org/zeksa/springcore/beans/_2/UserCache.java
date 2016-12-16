@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Component
 public class UserCache {
@@ -44,8 +45,15 @@ public class UserCache {
         counter.incrementAndGet();
     }
 
-    public List<String> get(String userName) {
-        return cache.get(userName);
+    public List<UserCacheDTO> get(String userName) {
+        return cache.get(userName).parallelStream().map(data -> toUserCacheDTO(data, userName)).collect(Collectors.toList());
+    }
+
+    private UserCacheDTO toUserCacheDTO(String data, String userName){
+        UserCacheDTO userCache = new UserCacheDTO();
+        userCache.setData(data);
+        userCache.setUserName(userName);
+        return userCache;
     }
 
     public int size(String userName) {
