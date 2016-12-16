@@ -3,7 +3,6 @@ package org.zeksa.springcore.resources._2;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 import org.zeksa.springcore.beans._2.UserCache;
 import org.zeksa.springcore.beans._2.UserCacheDTO;
 import org.zeksa.springcore.resources.ResourceAbstractTest;
-import org.zeksa.springcore.resources.TestStopwatch;
 import org.zeksa.springcore.resources.json.JsonSerializer;
 import org.zeksa.springcore.server.SpringCoreAppServer;
 
@@ -28,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,8 +37,6 @@ public class Resource2Test extends ResourceAbstractTest {
     private static final String SUPERUSER = "superuser";
     private static final String DATA = "data";
     private static int count = 5000;
-    @Rule
-    public TestStopwatch stopwatch = new TestStopwatch();
     private RestTemplate restTemplate = new TestRestTemplate();
     private List<UserCacheDTO> requests;
     @Autowired
@@ -63,12 +58,10 @@ public class Resource2Test extends ResourceAbstractTest {
     public void testAddUserData() throws JsonProcessingException {
         requests.parallelStream().forEach(this::callREST);
 
-        assertEquals(count, userCache.counter());
         assertEquals(count, requests.size());
+        assertEquals(count, userCache.counter());
         assertEquals(0, filterOutOfList(SUPERUSER).size());
         assertEquals(count, userCache.size(SUPERUSER));
-        
-        stopwatch.runtime(SECONDS);
     }
 
     private void callREST(UserCacheDTO request) {
