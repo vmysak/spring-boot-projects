@@ -15,6 +15,7 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 import org.zeksa.springcore.beans._2.UserCache;
@@ -38,7 +39,7 @@ public class Resource2Test extends ResourceAbstractTest {
     private static final Logger LOG = LoggerFactory.getLogger(Resource2Test.class);
     private static final String SUPERUSER = "superuser";
     private static final String DATA = "data";
-    private static int count = 500;
+    private static int count = 1000;
     private RestTemplate restTemplate = new TestRestTemplate();
     private List<RestRequest> postRequests;
     private List<RestRequest> getPostRequests;
