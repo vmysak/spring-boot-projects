@@ -1,7 +1,6 @@
 package org.zeksa.springcore.resources._2;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,6 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 import org.zeksa.springcore.beans._2.UserCache;
@@ -39,7 +37,8 @@ public class Resource2Test extends ResourceAbstractTest {
     private static final Logger LOG = LoggerFactory.getLogger(Resource2Test.class);
     private static final String SUPERUSER = "superuser";
     private static final String DATA = "data";
-    private static int count = 1000;
+    private static int dataCount = 100;
+    private static int userCount = 10;
     private RestTemplate restTemplate = new TestRestTemplate();
     private List<RestRequest> postRequests;
     private List<RestRequest> getPostRequests;
@@ -51,17 +50,19 @@ public class Resource2Test extends ResourceAbstractTest {
         postRequests = new ArrayList<>();
         getPostRequests = new ArrayList<>();
 
-        for (int i = 0; i < 2 * count; i++) {
-            UserCacheDTO data = new UserCacheDTO();
-            data.setUserName(SUPERUSER);
-            data.setData(DATA + i);
-            RestRequest request = createRestRequest(data, RequestType.POST, getResourceContextURL() + "cache");
-            if (i < count) {
-                postRequests.add(request);
-                request = createRestRequest(data, RequestType.GET, getResourceContextURL() + "cache/" + data.getUserName());
-                getPostRequests.add(request);
-            } else {
-                getPostRequests.add(request);
+        for (int u = 0; u < userCount; u++) {
+            for (int i = 0; i < 2 * dataCount; i++) {
+                UserCacheDTO data = new UserCacheDTO();
+                data.setUserName(SUPERUSER + u);
+                data.setData(DATA + i);
+                RestRequest request = createRestRequest(data, RequestType.POST, getResourceContextURL() + "cache");
+                if (i < dataCount) {
+                    postRequests.add(request);
+                    request = createRestRequest(data, RequestType.GET, getResourceContextURL() + "cache/" + data.getUserName());
+                    getPostRequests.add(request);
+                } else {
+                    getPostRequests.add(request);
+                }
             }
         }
     }
@@ -71,9 +72,11 @@ public class Resource2Test extends ResourceAbstractTest {
         postRequests.parallelStream().forEach(this::callRest);
         getPostRequests.parallelStream().forEach(this::callRest);
 
-        assertEquals(count, postRequests.size());
-        assertEquals(count * 2, userCache.counter());
-        assertEquals(count * 2, userCache.size(SUPERUSER));
+        assertEquals(dataCount * userCount, postRequests.size());
+        assertEquals(dataCount * 2 * userCount, userCache.counter());
+        for (int u = 0; u < userCount; u++) {
+            assertEquals(dataCount * 2, userCache.size(SUPERUSER + u));
+        }
     }
 
     private void callRest(RestRequest request) {
